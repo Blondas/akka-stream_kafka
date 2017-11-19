@@ -1,3 +1,5 @@
+package producers
+
 import akka.actor.ActorSystem
 import akka.kafka.scaladsl.{Consumer, Producer}
 import akka.kafka.{ConsumerSettings, ProducerMessage, ProducerSettings, Subscriptions}
@@ -7,14 +9,15 @@ import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.kafka.clients.producer.ProducerRecord
 import org.apache.kafka.common.serialization.{ByteArrayDeserializer, ByteArraySerializer, StringDeserializer, StringSerializer}
 
-object Application1 extends App {
-  implicit val system = ActorSystem("Application1")
+// commit consumer to flow producer:
+object Consumer1 extends App {
+  implicit val system = ActorSystem("Consumer1")
   implicit val materializer = ActorMaterializer()
 
   val consumerSettings = ConsumerSettings(
     system, new ByteArrayDeserializer, new StringDeserializer
   ).withBootstrapServers("localhost:9092")
-    .withGroupId("Application1")
+    .withGroupId("Consumer1")
     .withProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest")
 
   val producerSettings = ProducerSettings(
