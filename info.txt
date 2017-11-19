@@ -1,0 +1,2 @@
+very simple example based on:
+https://github.com/makersu/reactive-kafka-scala-example/blob/master/build.sbt
